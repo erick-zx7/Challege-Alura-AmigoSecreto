@@ -33,7 +33,24 @@ function agregarAmigos() {
     input.value = '';
 }
 
+function sortearAmigo() {
+    if (nombres.length === 0) {
+        alert('No hay amigos para sortear');
+        return;
+    }
+
+    const indice = Math.floor(Math.random() * nombres.length);
+    const nombreSorteado = nombres[indice];
+
+    const resultado = document.getElementById('resultado');
+    resultado.innerHTML = `El amigo sorteado es: ${nombreSorteado}`;
+}
+
 //Sortear amigos
-
-
 botonAgregar.addEventListener('click', agregarAmigos);
+
+const botonSortear = document.getElementById("sortear");
+botonSortear.addEventListener("click", function(e) {
+    e.preventDefault(); // Evita que el formulario se recargue
+    sortearAmigo();
+});

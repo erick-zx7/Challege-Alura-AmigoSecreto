@@ -129,6 +129,7 @@ img {
 .lista__amigo {
     list-style: none;
     font-size: 1.5rem;
+    text-transform: uppercase;
     font-weight: 700;
     text-align: center;
     width: 100%;
@@ -245,4 +246,17 @@ img {
 }
 .formulario__boton:hover {
     transform: scale(1.1);
+}
+
+/* Sorteo */
+.amigo-sorteado {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: var(--primario-oscuro);
+    color: var(--blanco);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 2rem 0;
 }
