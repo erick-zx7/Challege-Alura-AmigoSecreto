@@ -3,145 +3,247 @@
     --contenedor: #F0F7EE;
     --primario: #86cdcb;
     --primario-oscuro: #437876;
+    --primario-hover: #6dbab8;
     --blanco: #ffffff;
     --negro: #000000;
     --gris: #979ea5;
     --gris-claro: #b5bcc3;
     --gris-texto: #434343;
     --listado: #36c8c3;
+    --exito: #4CAF50;
+    --error: #f44336;
+    --sombra: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    --transicion: all 0.3s ease;
 }
 
-/* Globales */
-html {
-    font-size: 62.5%;
+/* Reset y estilos globales */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-*, *:before, *:after {
-    box-sizing: inherit;
+
+html {
+    font-size: 62.5%;
 }
 
 body {
     background-color: var(--background);
     font-family: 'Chivo', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
 }
 
 img {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 
+/* Contenedor principal */
 .contenedor {
     background-color: var(--contenedor);
-    padding: 2rem;
+    padding: 3rem 2rem;
     margin: 0 auto;
     width: 100%;
+    max-width: 1000px;
     border-radius: 3rem;
-    box-shadow: 0px 0px 15px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--sombra);
+    transition: var(--transicion);
 }
+
 @media (min-width: 768px) {
     .contenedor {
         padding: 5rem;
-        width: 80%;
     }
 }
 
-/* Juego */
+/* Cabecera */
 .header {
     display: flex;
     flex-direction: column-reverse;
-    border-bottom: solid var(--gris-claro);
+    border-bottom: 1px solid var(--gris-claro);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
 }
+
 @media (min-width: 768px) {
     .header {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
         align-items: center;
+        gap: 3rem;
     }
 }
 
 .header__imagen {
-    width: 100%;
+    max-width: 250px;
     margin: 0 auto;
+    animation: flotar 3s ease-in-out infinite;
 }
+
 @media (min-width: 768px) {
     .header__imagen {
-        width: 40rem;
-        height: 40rem;
+        max-width: 350px;
     }
+}
+
+.header__informacion {
+    text-align: center;
 }
 
 .header__titulo {
     color: var(--primario-oscuro);
-    font-size: 3rem;
-    text-align: center;
+    font-size: 3.2rem;
     font-weight: 900;
-    line-height: 1;
-    margin: 0;
+    line-height: 1.2;
+    margin-bottom: 1rem;
 }
-.header__descripcion {
-    text-align: center;
-}
+
 @media (min-width: 768px) {
     .header__titulo {
-        font-size: 6rem;
-        margin-bottom: 4rem;
+        font-size: 4.8rem;
+        margin-bottom: 2rem;
     }
+}
 
+.header__descripcion {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: var(--gris-texto);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
     .header__descripcion {
-        font-size: 2rem;
-        text-align: center;
+        font-size: 1.8rem;
     }
 }
 
 /* Lista de amigos */
 .lista {
-    border-bottom: solid var(--gris-claro);
+    border-bottom: 1px solid var(--gris-claro);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
 .lista__heading {
     text-align: center;
     color: var(--primario-oscuro);
-    font-size: 2rem;
-    font-weight: 900;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
 }
+
 @media (min-width: 768px) {
     .lista__heading {
-        font-size: 4rem;
+        font-size: 3.2rem;
     }
 }
 
 .lista__contenido {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    min-height: 60px;
 }
+
 @media (min-width: 768px) {
     .lista__contenido {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        margin-bottom: 5rem;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
     }
 }
 
-.lista__amigo {
-    list-style: none;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    font-weight: 700;
+.lista__vacia {
     text-align: center;
-    width: 100%;
-    background-color: var(--primario);
-    color: var(--gris-texto);
-    padding: 1rem;
+    font-size: 1.6rem;
+    color: var(--gris);
+    padding: 1.5rem;
+    background-color: rgba(135, 205, 203, 0.1);
     border-radius: 1rem;
 }
+
+/* Elemento de amigo */
+.lista__amigo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    background-color: var(--primario);
+    color: var(--gris-texto);
+    padding: 1.2rem 1.5rem;
+    border-radius: 1rem;
+    transition: var(--transicion);
+    animation: aparecer 0.3s ease-out;
+}
+
+.lista__amigo:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sombra);
+}
+
 @media (min-width: 768px) {
     .lista__amigo {
-        font-size: 2.5rem;
-        height: 6rem;
+        font-size: 1.8rem;
+        padding: 1.5rem 2rem;
+    }
+}
+
+.eliminar-amigo {
+    background: none;
+    border: none;
+    color: var(--error);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    transition: var(--transicion);
+    opacity: 0.7;
+    line-height: 1;
+}
+
+.eliminar-amigo:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Resultado del sorteo */
+.amigo-sorteado {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: var(--primario-oscuro);
+    color: var(--blanco);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transicion);
+}
+
+.amigo-sorteado.vacio {
+    background-color: rgba(135, 205, 203, 0.2);
+    color: var(--gris-texto);
+}
+
+@media (min-width: 768px) {
+    .amigo-sorteado {
+        font-size: 2.8rem;
+        padding: 2rem;
     }
 }
 
@@ -149,15 +251,16 @@ img {
 .formulario {
     margin-top: 3rem;
     background-color: var(--gris);
-    padding: 2rem 1rem;
-    border-radius: 3rem;
+    padding: 1.5rem;
+    border-radius: 2rem;
 }
+
 @media (min-width: 768px) {
     .formulario {
-        margin-top: 5rem;
-        padding: 2rem 4rem;
+        padding: 2.5rem 3rem;
     }
 }
+
 .formulario fieldset {
     border: none;
 }
@@ -165,46 +268,68 @@ img {
 .formulario__campo {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: .5rem;
+    margin-bottom: 1.5rem;
 }
+
 @media (min-width: 768px) {
     .formulario__campo {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        margin: 2rem 0;
+        margin-bottom: 3rem;
     }
 }
-.formulario__campo input {
-    height: 6rem;
-    width: 100%;
-    padding: 1rem;
+
+.input-amigo {
+    flex: 1;
+    height: 5.5rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 2rem;
+    width: 100%;
+    padding: 1rem .5rem;
+    font-size: 1.6rem;
     border: none;
     border-radius: 1rem;
+    outline: none;
+    transition: var(--transicion);
+    box-shadow: var(--sombra);
 }
+
+.input-amigo:focus {
+    box-shadow: 0 0 0 3px rgba(134, 205, 203, 0.5);
+}
+
 @media (min-width: 768px) {
-    .formulario__campo input {
-        width: 100%;
-        padding: 1rem;
-        text-align: center;
-        font-size: 2rem;
-        border: none;
-        border-radius: 1rem;
+    .input-amigo {
+        height: 6rem;
+        font-size: 1.8rem;
+        padding: 1rem 2rem;
     }
 }
 
 .agregar {
-    all: unset;
     background-color: var(--primario);
-    padding: 0 1.5rem;
-    font-size: 1.5rem;
-    border-radius: 1rem;
     color: var(--gris-texto);
-    cursor: pointer;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.5rem;
     font-weight: 900;
+    cursor: pointer;
+    width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transicion);
+    box-shadow: var(--sombra);
+}
+@media (min-width: 768px) {
+    .agregar {
+        font-size: 2.4rem;
+        width: 6rem;
+    }
+}
+
+.agregar:hover {
+    background-color: var(--primario-hover);
+    transform: scale(1.05);
 }
 
 .formulario__botones {
@@ -212,20 +337,20 @@ img {
     flex-direction: column;
     gap: 1rem;
 }
+
 @media (min-width: 768px) {
     .formulario__botones {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 4rem;
+        gap: 2.5rem;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
 .formulario__boton {
-    all: unset;
     background-color: var(--primario);
     color: var(--gris-texto);
-    padding: 1rem 3.5rem;
-    font-size: 1.5rem;
+    padding: 1.5rem;
+    font-size: 1.6rem;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 700;
@@ -233,30 +358,68 @@ img {
     text-align: center;
     border: none;
     cursor: pointer;
-    transition: transform .3s;
-}
-@media (min-width: 768px) {
-    .formulario__boton {
-        height: 5rem;
-        font-size: 2rem;
-    }
-}
-.formulario__boton--inactivo {
-    background-color: var(--blanco);
-}
-.formulario__boton:hover {
-    transform: scale(1.1);
+    transition: var(--transicion);
+    box-shadow: var(--sombra);
 }
 
-/* Sorteo */
-.amigo-sorteado {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    background-color: var(--primario-oscuro);
+.formulario__boton:hover {
+    background-color: var(--primario-hover);
+    transform: translateY(-3px);
+}
+
+.formulario__boton:active {
+    transform: translateY(0);
+}
+
+#reiniciar {
+    background-color: var(--error);
     color: var(--blanco);
+}
+
+#reiniciar:hover {
+    background-color: #d32f2f;
+}
+
+/* Mensajes de estado */
+.mensaje {
     padding: 1rem;
-    border-radius: 1rem;
-    margin: 2rem 0;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 1.4rem;
+    display: none;
+}
+
+.mensaje.exito {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: var(--exito);
+    display: block;
+}
+
+.mensaje.error {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: var(--error);
+    display: block;
+}
+
+/* Animaciones */
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.animar {
+    animation: latido 0.5s ease;
 }
